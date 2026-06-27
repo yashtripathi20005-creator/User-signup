@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Register - User Auth System{% endblock %}
+{% block heading %}Create Account{% endblock %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('auth.register') }}">
+    {{ form.hidden_tag() }}
+    
+    <div class="form-group">
+        {{ form.username.label }}
+        {{ form.username(placeholder="Choose a username") }}
+        {% for error in form.username.errors %}
+            <div class="error-text">{{ error }}</div>
+        {% endfor %}
+    </div>
+    
+    <div class="form-group">
+        {{ form.email.label }}
+        {{ form.email(placeholder="Enter your email") }}
+        {% for error in form.email.errors %}
+            <div class="error-text">{{ error }}</div>
+        {% endfor %}
+    </div>
+    
+    <div class="form-group">
+        {{ form.password.label }}
+        {{ form.password(placeholder="Create a password (min 8 characters)") }}
+        {% for error in form.password.errors %}
+            <div class="error-text">{{ error }}</div>
+        {% endfor %}
+    </div>
+    
+    <div class="form-group">
+        {{ form.password_confirm.label }}
+        {{ form.password_confirm(placeholder="Confirm your password") }}
+        {% for error in form.password_confirm.errors %}
+            <div class="error-text">{{ error }}</div>
+        {% endfor %}
+    </div>
+    
+    {{ form.submit(class="btn") }}
+</form>
+
+<div class="auth-links">
+    <p>Already have an account? <a href="{{ url_for('auth.login') }}">Log in here</a></p>
+</div>
+{% endblock %}
